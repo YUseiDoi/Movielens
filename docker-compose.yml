@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  pytorch:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 'movielens'
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
